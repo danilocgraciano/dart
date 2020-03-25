@@ -20,10 +20,10 @@ class _HomePageState extends State<HomePage> {
     http.Response response;
     if (_search == null || _search.isEmpty) {
       response = await http.get(
-          "https://api.giphy.com/v1/gifs/trending?api_key=Ha6OGQPuKhgGrZKXet1s61xI39fmy1ke&limit=20&rating=G");
+          'https://api.giphy.com/v1/gifs/trending?api_key=Ha6OGQPuKhgGrZKXet1s61xI39fmy1ke&limit=20&rating=G');
     } else {
       response = await http.get(
-          "https://api.giphy.com/v1/gifs/search?api_key=Ha6OGQPuKhgGrZKXet1s61xI39fmy1ke&q=$_search&limit=19&offset=$_offset&rating=G&lang=en");
+          'https://api.giphy.com/v1/gifs/search?api_key=Ha6OGQPuKhgGrZKXet1s61xI39fmy1ke&q=$_search&limit=19&offset=$_offset&rating=G&lang=en');
     }
     return json.decode(response.body);
   }
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Image.network(
-            "https://developers.giphy.com/static/img/dev-logo-lg.7404c00322a8.gif"),
+            'https://developers.giphy.com/static/img/dev-logo-lg.7404c00322a8.gif'),
         centerTitle: true,
       ),
       backgroundColor: Colors.black,
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
-                  labelText: "Pesquise aqui:",
+                  labelText: 'Pesquise aqui:',
                   labelStyle: TextStyle(color: Colors.white),
                   border: OutlineInputBorder()),
               style: TextStyle(color: Colors.white, fontSize: 18.0),
@@ -100,14 +100,14 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(10.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, crossAxisSpacing: 10.0, mainAxisSpacing: 10.0),
-        itemCount: _getCount(snapshot.data["data"]),
+        itemCount: _getCount(snapshot.data['data']),
         itemBuilder: (context, index) {
-          if (_search == null || index < snapshot.data["data"].length) {
+          if (_search == null || index < snapshot.data['data'].length) {
             return GestureDetector(
               child: FadeInImage.memoryNetwork(
                   placeholder: kTransparentImage,
-                  image: snapshot.data["data"][index]["images"]["fixed_height"]
-                      ["url"],
+                  image: snapshot.data['data'][index]['images']['fixed_height']
+                      ['url'],
                   height: 300.0,
                   fit: BoxFit.cover),
               onTap: () {
@@ -115,11 +115,11 @@ class _HomePageState extends State<HomePage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            GifPage(snapshot.data["data"][index])));
+                            GifPage(snapshot.data['data'][index])));
               },
               onLongPress: () {
-                Share.share(snapshot.data["data"][index]["images"]
-                    ["fixed_height"]["url"]);
+                Share.share(snapshot.data['data'][index]['images']
+                    ['fixed_height']['url']);
               },
             );
           } else {
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Icon(Icons.add, color: Colors.white, size: 70),
                   Text(
-                    "Mais...",
+                    'Mais...',
                     style: TextStyle(color: Colors.white, fontSize: 22.0),
                   ),
                 ],
