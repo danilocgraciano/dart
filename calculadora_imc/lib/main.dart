@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(home: Home()));
-}
+void main() => runApp(MaterialApp(home: Home()));
 
 class Home extends StatefulWidget {
   @override
@@ -70,35 +68,9 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Icon(
-                  Icons.person_outline,
-                  size: 120,
-                  color: Colors.green,
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelText: 'Peso (kg)',
-                      labelStyle: TextStyle(color: Colors.green)),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.green, fontSize: 25),
-                  controller: weightController,
-                  validator: (value) {
-                    if (value.isEmpty) return 'Peso inválido';
-                  },
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelText: 'Altura (cm)',
-                      labelStyle: TextStyle(color: Colors.green)),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.green, fontSize: 25),
-                  controller: heightController,
-                  validator: (value) {
-                    if (value.isEmpty) return 'Altura inválida';
-                  },
-                ),
+                getLogo(),
+                getFieldPeso(),
+                getFieldAltura(),
                 Padding(
                   padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                   child: Container(
@@ -117,14 +89,54 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                Text(
-                  _infoText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.green, fontSize: 25.0),
-                )
+                getInfoText()
               ],
             ),
           )),
+    );
+  }
+
+  Widget getLogo() {
+    return Icon(
+      Icons.person_outline,
+      size: 120,
+      color: Colors.green,
+    );
+  }
+
+  Widget getFieldPeso() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+          labelText: 'Peso (kg)', labelStyle: TextStyle(color: Colors.green)),
+      textAlign: TextAlign.center,
+      style: TextStyle(color: Colors.green, fontSize: 25),
+      controller: weightController,
+      validator: (value) {
+        if (value.isEmpty) return 'Peso inválido';
+      },
+    );
+  }
+
+  Widget getFieldAltura() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+          labelText: 'Altura (cm)', labelStyle: TextStyle(color: Colors.green)),
+      textAlign: TextAlign.center,
+      style: TextStyle(color: Colors.green, fontSize: 25),
+      controller: heightController,
+      validator: (value) {
+        if (value.isEmpty) return 'Altura inválida';
+      },
+    );
+  }
+
+  Widget getInfoText() {
+    return Text(
+      _infoText,
+      textAlign: TextAlign.center,
+      style: TextStyle(color: Colors.green, fontSize: 25.0),
     );
   }
 }
