@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(title: "Contador de Pessoas", home: Home()));
-}
+void main() => runApp(MaterialApp(title: 'Contador de Pessoas', home: Home()));
 
 class Home extends StatefulWidget {
   @override
@@ -11,18 +9,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _people = 0;
-  String _infoText = "Pode Entrar";
+  String _infoText = 'Pode Entrar';
 
   void changePeople(int delta) {
     // REFRESH VIEW
     setState(() {
       _people += delta;
       if (_people < 0) {
-        _infoText = "Mundo invertido?!";
+        _infoText = 'Mundo invertido?!';
       } else if (_people <= 10) {
-        _infoText = "Pode Entrar";
+        _infoText = 'Pode Entrar';
       } else {
-        _infoText = "Lotado!";
+        _infoText = 'Lotado!';
       }
     });
   }
@@ -32,66 +30,66 @@ class _HomeState extends State<Home> {
     return Stack(
       children: <Widget>[
         Image.asset(
-          "images/restaurant.jpg",
+          'images/restaurant.jpg',
           fit: BoxFit.cover,
-          height: 1000.0,
+          height: 1000,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "Pessoas: $_people",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.none),
-            ),
+            getTitle(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: FlatButton(
-                    child: Text(
-                      "+1",
-                      style: TextStyle(
-                          fontSize: 40.0,
-                          color: Colors.white,
-                          decoration: TextDecoration.none),
-                    ),
-                    onPressed: () {
-                      changePeople(1);
-                    },
-                  ),
+                  padding: EdgeInsets.all(10),
+                  child: getButton(1),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: FlatButton(
-                    child: Text(
-                      "-1",
-                      style: TextStyle(
-                          fontSize: 40.0,
-                          color: Colors.white,
-                          decoration: TextDecoration.none),
-                    ),
-                    onPressed: () {
-                      changePeople(-1);
-                    },
-                  ),
+                  padding: EdgeInsets.all(10),
+                  child: getButton(-1),
                 ),
               ],
             ),
-            Text(
-              _infoText,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 30.0,
-                  decoration: TextDecoration.none),
-            )
+            getInfoText()
           ],
         )
       ],
+    );
+  }
+
+  getTitle() {
+    return Text(
+      'Pessoas: $_people',
+      style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          decoration: TextDecoration.none),
+    );
+  }
+
+  getButton(int value) {
+    return FlatButton(
+        onPressed: () {
+          changePeople(value);
+        },
+        child: Text(
+          (value > 0) ? '+1' : '-1',
+          style: TextStyle(
+              fontSize: 40,
+              color: Colors.white,
+              decoration: TextDecoration.none),
+        ));
+  }
+
+  getInfoText() {
+    return Text(
+      _infoText,
+      style: TextStyle(
+          color: Colors.white,
+          fontStyle: FontStyle.italic,
+          fontSize: 30,
+          decoration: TextDecoration.none),
     );
   }
 }
